@@ -33,8 +33,9 @@ from pyPLANES.pw.pw_layers import *
 from pyPLANES.pw.pw_interfaces import *
 
 class MultiLayer():
-    """
-    Multilayer structure
+    """Multilayer structure
+
+    TODO
     """
     def __init__(self, ml):
         # Creation of the list of layers

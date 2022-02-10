@@ -69,8 +69,7 @@ def fsi_elementary_matrix(_elem):
     return M
 
 def fsi_elementary_matrix_incompatible(_elem):
-    """
-    fsi_elementary_matrix_incompatible: Create the elementary "mass" matrix in the case of an incompatible mesh
+    """Create the elementary "mass" matrix in the case of an incompatible mesh
 
     Parameters
     ----------
@@ -78,9 +77,8 @@ def fsi_elementary_matrix_incompatible(_elem):
 
     Returns
     -------
-    [type]
-        [description]
-
+    Matrices: np.ndarray
+        TODO
     """
     coord_e = _elem.get_coordinates()
     K_ref = _elem.reference_element

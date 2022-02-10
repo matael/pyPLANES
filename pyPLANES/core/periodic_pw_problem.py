@@ -41,9 +41,7 @@ from pyPLANES.pw.pw_interfaces import *
 
 
 class PeriodicPwProblem(Calculus, PeriodicMultiLayer):
-    """
-        eTMM Problem
-    """ 
+    """eTMM Problem"""
     def __init__(self, **kwargs):
         assert "ml" in kwargs
         ml = kwargs.get("ml")

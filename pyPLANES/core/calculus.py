@@ -44,12 +44,13 @@ from pyPLANES.core.result import Result
 
 Air = Air()
 
+# TODO: all docstrings
+
 class Calculus():
-    """ pyPLANES Calculus 
+    """pyPLANES Calculus 
 
-    Attributes :
-    ------------------------
-
+    ----------
+    Attributes
     frequencies : ndarray
         list of calculation frequencies
 
@@ -60,10 +61,10 @@ class Calculus():
         current circular frequency
 
     theta_d : real or False
-        Incident angle in degree 
+        Incident angle in degree
 
     name_project : str
-        Incident angle in degree 
+        Name of the project (for export purposes)
 
     outfiles_directory : str or False
         Directory for out files
@@ -125,7 +126,7 @@ class Calculus():
         self.start_time = time.time()
 
     def resolution(self):
-        """  Resolution of the problem """        
+        """Resolution of the problem"""
         if self.verbose:
             print("%%%%%%%%%%%%% Resolution of PLANES %%%%%%%%%%%%%%%%%")
         for f in self.frequencies:
@@ -156,7 +157,7 @@ class Calculus():
                 json_file.write("\n")
         
     def open_info_file(self):
-        """  Initialise out files """    
+        """Initialise out files"""
         # self.txt_file = open(self.txt_file_name, 'w')
         self.info_file = open(self.info_file_name, 'w')
         self.info_file.write("Output File from pyPLANES\n")
@@ -165,9 +166,7 @@ class Calculus():
         self.start_time = time.time()
 
     def create_linear_system(self, omega):
-        """
-        Create the linear system
-        """
+        """Create the linear system"""
         if self.verbose:
             print("Creation of the linear system for f={}".format(omega/(2*pi)))
 
@@ -189,8 +188,7 @@ class Calculus():
         pass
 
     def init_vec_frequencies(self, f_bounds):
-        """
-        Create the frequency vector that will be used in the calculations
+        """Create the frequency vector that will be used in the calculations
 
         Parameters
         ----------
@@ -202,7 +200,7 @@ class Calculus():
 
         Returns
         -------
-        ndarray of the frequencies
+        frequencies: np.ndarray
         """
         if f_bounds[2] > 0:
                 frequencies = np.linspace(f_bounds[0], f_bounds[1], f_bounds[2])

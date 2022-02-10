@@ -39,9 +39,7 @@ from pyPLANES.pw.pw_layers import *
 from pyPLANES.pw.pw_interfaces import *
 
 class PwProblem(Calculus, MultiLayer):
-    """
-        Plane Wave Problem 
-    """
+    """Plane Wave Problem"""
     def __init__(self, **kwargs):
         Calculus.__init__(self, **kwargs)
         self.Result.Solver = type(self).__name__

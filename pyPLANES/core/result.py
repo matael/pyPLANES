@@ -32,14 +32,12 @@ import numpy.linalg as LA
 
 
 class Result():
-    """ pyPLANES Result
+    """pyPLANES Result
 
-    Attributes :
-    ------------------------
-
+    Attributes
+    ----------
     f : real or complex
         frequency of the simulation
-
     """
 
     def __init__(self, _in=None):

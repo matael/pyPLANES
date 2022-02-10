@@ -33,9 +33,15 @@ from pyPLANES.pw.pw_polarisation import fluid_waves_TMM
 from scipy.linalg import block_diag
 
 class PwInterface():
+    """Represents a generic interface in the Plane Wave Solver
+
+    Parameters
+    ----------
+
+    layer1, layer2:
+        layers on each side of the desired interface
     """
-    Interface for Plane Wave Solver
-    """
+
     def __init__(self, layer1=None, layer2=None):
         self.layers = [layer1, layer2]
     def update_M_global(self, M, i_eq):
@@ -64,9 +70,7 @@ class PwInterface():
         return i_eq
 
 class PwInterfaceType0(PwInterface):
-    """
-    Interface with same number of physical medium on both side
-    """
+    """Interface with same number of physical medium on both side"""
     def __init__(self, layer1=None, layer2=None):
         super().__init__(layer1,layer2)
 
@@ -74,9 +78,7 @@ class PwInterfaceType0(PwInterface):
         return Om, np.eye(self.layers[1].nb_waves_in_medium*self.layers[1].nb_waves)
 
 class PwInterfaceType1(PwInterface): 
-    """
-    Interface with less waves in layer 0 than in layer 1 
-    """
+    """Interface with less waves in layer 1 than in layer 2"""
     def __init__(self, layer1=None, layer2=None):
         super().__init__(layer1,layer2)
 
@@ -96,9 +98,7 @@ class PwInterfaceType1(PwInterface):
         return Om, TTau
 
 class PwInterfaceType2(PwInterface):
-    """
-        Interface with more waves in layer 0 than in layer 1
-    """
+    """Interface with more waves in layer 1 than in layer 2"""
     def __init__(self, layer1=None, layer2=None):
         super().__init__(layer1,layer2)
         self.n_0 = None
@@ -115,9 +115,7 @@ class PwInterfaceType2(PwInterface):
         return Om, Tau
 
 class FluidFluidInterface(PwInterfaceType0):
-    """
-    Fluid-fluid interface 
-    """
+    """Fluid-fluid interface"""
     def __init__(self, layer1=None, layer2=None):
         super().__init__(layer1,layer2)
         self.n_0 = self.n_1 = 1
@@ -130,9 +128,7 @@ class FluidFluidInterface(PwInterfaceType0):
         return out
 
 class FluidPemInterface(PwInterfaceType1):
-    """
-    Fluid-PEM interface 
-    """
+    """Fluid-PEM interface"""
     def __init__(self, layer1=None, layer2=None):
         super().__init__(layer1,layer2)
 
@@ -160,9 +156,7 @@ class FluidPemInterface(PwInterfaceType1):
         return PwInterfaceType1.transfert(self, Om)
 
 class PemFluidInterface(PwInterfaceType2):
-    """
-    PEM-Fluid interface 
-    """
+    """PEM-Fluid interface"""
     def __init__(self, layer1=None, layer2=None):
         super().__init__(layer1,layer2)
         self.n_0 = 3
@@ -200,9 +194,7 @@ class PemFluidInterface(PwInterfaceType2):
         return out
 
 class FluidElasticInterface(PwInterfaceType1):
-    """
-    Fluid-Elastic interface 
-    """
+    """Fluid-Elastic interface"""
     def __init__(self, layer1=None, layer2=None):
         super().__init__(layer1,layer2)
         self.n_0 = 1
@@ -226,9 +218,7 @@ class FluidElasticInterface(PwInterfaceType1):
         return Om, Tau
 
 class ElasticFluidInterface(PwInterfaceType2):
-    """
-    Elastic-Fluid interface 
-    """
+    """Elastic-Fluid interface"""
     def __init__(self, layer1=None, layer2=None):
         super().__init__(layer1,layer2)
         self.n_0 = 2
@@ -248,9 +238,7 @@ class ElasticFluidInterface(PwInterfaceType2):
         return out
 
 class ElasticElasticInterface(PwInterfaceType0):
-    """
-    Elastic-Elastic interface 
-    """
+    """Elastic-Elastic interface"""
     def __init__(self, layer1=None, layer2=None):
         super().__init__(layer1,layer2)
         self.n_0 = 2
@@ -265,9 +253,7 @@ class ElasticElasticInterface(PwInterfaceType0):
         return out
 
 class PemPemInterface(PwInterfaceType0):
-    """
-    PEM-PEM interface 
-    """
+    """PEM-PEM interface"""
     def __init__(self, layer1=None, layer2=None):
         super().__init__(layer1,layer2)
         self.n_0 = 3
@@ -304,9 +290,7 @@ class PemPemInterface(PwInterfaceType0):
         return (mat_pem_0@mat_pem_1)@Om, Tau
 
 class ElasticPemInterface(PwInterfaceType1):
-    """
-    Elastic-PEM interface 
-    """
+    """Elastic-PEM interface"""
     def __init__(self, layer1=None, layer2=None):
         super().__init__(layer1,layer2)
         self.n_0 = 2
@@ -342,9 +326,7 @@ class ElasticPemInterface(PwInterfaceType1):
         return PwInterfaceType1.transfert(self, Om)
 
 class PemElasticInterface(PwInterfaceType2):
-    """
-    PEM-Elastic interface 
-    """
+    """PEM-Elastic interface"""
     def __init__(self, layer1=None, layer2=None):
         super().__init__(layer1,layer2)
         self.n_0 = 3
@@ -389,9 +371,7 @@ class PemElasticInterface(PwInterfaceType2):
         return out
 
 class FluidRigidBacking(PwInterface):
-    """
-    Rigid backing for a fluid layer
-    """
+    """Rigid backing for a fluid layer"""
     def __init__(self, layer1=None, layer2=None):
         super().__init__(layer1,layer2)
 
@@ -412,9 +392,7 @@ class FluidRigidBacking(PwInterface):
         return np.array(out, dtype=np.complex)
 
 class PemBacking(PwInterface):
-    """
-    Rigid backing for a pem layer
-    """
+    """Rigid backing for a pem layer"""
     def __init__(self, layer1=None, layer2=None):
         super().__init__(layer1,layer2)
 
@@ -459,10 +437,7 @@ class PemBacking(PwInterface):
         return np.array(out, dtype=np.complex)
 
 class ElasticBacking(PwInterface):
-
-    """
-    Rigid backing for an elastic layer
-    """
+    """Rigid backing for an elastic layer"""
     def __init__(self, layer1=None, layer2=None):
         super().__init__(layer1,layer2)
 
@@ -495,9 +470,7 @@ class ElasticBacking(PwInterface):
         return i_eq
 
 class SemiInfinite(PwInterface):
-    """
-    Semi-infinite boundary
-    """
+    """Semi-infinite boundary"""
     def __init__(self, layer1=None, layer2=None):
         super().__init__(layer1,layer2) 
         self.medium = load_material("Air")

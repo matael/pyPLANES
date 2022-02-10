@@ -92,7 +92,8 @@ class GenericElement:
         return coorde
 
     def get_center(self):
-        """ 
+        """Find the center of a given element
+
         Returns
         -------
         numpy array

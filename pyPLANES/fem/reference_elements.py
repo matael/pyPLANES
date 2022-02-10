@@ -45,13 +45,16 @@ import quadpy as quadpy
 
 
 class Ka:
+    """
+    Parameters
+    ----------
+    order : int
+        polynomial order of the element
+    p : int
+        order of the integration scheme
+    """
+
     def __init__(self, order, p):
-        """
-        Parameters
-        ----------
-        order : int, polynomial order of the element
-        p : int, order of the integration scheme
-        """
         if order<8:
             self.order = order
         else:

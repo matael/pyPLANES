@@ -73,6 +73,8 @@ class DgmElement(GenericElement):
         """
         Returns the values of the coordinates 
 
+        TODO
+
         Parameters
         ----------
         field : [type]

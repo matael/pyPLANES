@@ -37,9 +37,7 @@ from pyPLANES.pw.pw_layers import *
 from pyPLANES.pw.pw_interfaces import *
 
 class PeriodicMultiLayer():
-    """
-    Periodic Multilayer structure
-    """
+    """Periodic Multilayer structure"""
     def __init__(self, ml, **kwargs):
         # Creation of the list of layers
         self.layers = []

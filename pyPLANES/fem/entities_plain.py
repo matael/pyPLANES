@@ -110,12 +110,13 @@ class FemEntity(GmshEntity):
 
 
     def elementary_matrices(self, _elem):
-        """"  Create elementary matrices of the entity"""
+        """Create elementary matrices of the entity"""
         pass
 
     def update_system(self, omega):
-        """
-        Loop on the element of the entities
+        """Loop on the element of the entities
+
+        To be overloaded in children classes
 
         Parameters
         ----------
@@ -151,8 +152,9 @@ class DgmEntity(GmshEntity):
         pass
 
     def update_system(self, omega):
-        """
-        Loop on the element of the entities
+        """Loop on the element of the entities
+
+        To be overloaded in children classes
 
         Parameters
         ----------

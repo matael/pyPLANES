@@ -85,19 +85,24 @@ def elastic_waves_TMM(mat,kx):
     return Phi, lam
 
 def fluid_waves_TMM(mat, kx):
-    """
-    Polarisation  S={0:u_y , 1:p} and jky propagation terms
+    """Computes the polarisation matrix and jky propagation terms for a fluid medium
+
+    State vector for fluid S={0:u_y , 1:p}
 
     Parameters
     ----------
-    mat : mediapack medium 
-    kx : numpy array of the transsversal wave numbers. Its length corresponds to the number n_w of Bloch waves for the periodic medium (equal to 1 in the case of an infinite extend layers)
+    mat :
+        mediapack.Medium 
+    kx : np.ndarray
+        transsversal wave numbers. Its length corresponds to the number n_w of Bloch waves for the periodic medium (equal to 1 in the case of an infinite extend layers)
 
     Returns
     -------
-    Phi : numpy matrix of dimension (2*n_w x 2*n_w) with the polarisation (block-matrix)
-    lam : numpy vectors of length 2*n_w with the 1j*ky/ For each pair the first one is going in the positive y direction
-
+    Phi : np.ndarray
+        polarisation matrix (block-matrix) of dimension (2*n_w x 2*n_w)
+    lam : 1D-array
+        vector of 1j*ky pair of length 2*n_w
+        For each pair the first one is going in the positive y direction
     """
     if mat.MEDIUM_TYPE == 'eqf':
         K = mat.K_eq_til

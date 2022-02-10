@@ -33,31 +33,30 @@ from pyPLANES.pw.pw_polarisation import fluid_waves_TMM, elastic_waves_TMM, PEM_
 from scipy.linalg import block_diag
 
 class PwLayer():
-    """
-    Base class for Plane Wave layer definition and manipulation
-    
-    Attributes :
-    ------------------------
+    """Base class for Plane Wave layer definition and manipulation
 
-    medium : mediapack material 
+    Attributes
+    ----------
 
-    d : thickness of the layer 
+    medium : mediapack.Medium
+        material filling the layer
+    d : float
+        thickness of the layer
+    x : list[float]
+        positions of the layer faces
+    interfaces : list[Interfaces]
+        interfaces of each face the layer
 
-    x : list with the abscissa of the layer
-
-    interfaces : list with the interfaces of the layer
-    
+    Parameters
+    ----------
+    mat : mediapack.Medium
+        Material filling the layer
+    d : float
+        thickness of the layer
+    x_0 : float
+        position of the first interface
     """
     def __init__(self, mat, d, x_0=0):
-        """
-        Parameters
-        ----------
-        mat : mediapack medium 
-            Name of the material 
-        d : float
-            thickness of the layer
-        x_0 : position of the first interface        
-        """
         self.medium = mat 
         self.d = d
         # pymls layer constructor 
@@ -78,21 +77,20 @@ class PwLayer():
         pass
 
     def transfert(self, Om):
-        """
-        Update the information matrix Omega, Implemented in derived classes
+        """Update the information matrix Omega, Implemented in children classes
 
         Parameters
         ----------
-        Om : ndarray
+        Om : np.ndarray
             Information matrix on the + side of the layer
 
         Returns
         ----------
-        Om_ : ndarray
+        Om_ : np.ndarray
             Information matrix on the - side of the layer
 
-        Xi : ndarray
-            Back_propagation matrix (to be used only for transmission problems)
+        Xi : np.ndarray
+            Back-propagation matrix (to be used only for transmission problems)
         """
 
         self.order_lam()

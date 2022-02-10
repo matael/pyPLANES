@@ -58,9 +58,10 @@ Air = Air()
 
 
 class PwProblem(PwCalculus, MultiLayer):
+    """Plane Wave Problem
+
+    TODO
     """
-        Plane Wave Problem 
-    """ 
     def __init__(self, **kwargs):
         PwCalculus.__init__(self, **kwargs)
         termination = kwargs.get("termination","rigid")

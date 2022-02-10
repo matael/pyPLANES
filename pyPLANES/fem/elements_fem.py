@@ -52,7 +52,7 @@ class FemEdge(GenericEdge):
         return out
 
 class FemFace:
-    """ Finite-Element Face
+    """Finite-Element Face
 
     Parameters
     ----------
@@ -64,6 +64,8 @@ class FemFace:
         [description]
     order : [type]
         [description]
+
+    TODO
     """
 
     def __init__(self, tag, vertices, element, order):
@@ -83,10 +85,7 @@ class FemFace:
         return out
 
 class FemBubble:
-    ''' Class Bubble '''
-    """
-    [summary]
-    """
+    """Representation of the Bubble elements"""
     def __init__(self,nodes,element,order,geo):
         """
         [summary]
@@ -119,29 +118,25 @@ class FemBubble:
         return out
 
 class FemElement(GenericElement):
-    ''' Element of pyPLANES
+    """Element of pyPLANES
 
-    Parameters:
-    -----------
+    Parameters
+    ----------
     typ : int
         GMSH type of the element
-
     coorde : numpy array
         Array of nodes coordinates (dim = 3x nb vertices )
-
     Ref_Elem : Reference Element
 
-
-    Attributes :
-    ------------------------
-
-    edges : List of edge instances associated to the element
-
-    faces : List of face instances associated to the element (optional)
-
-    bubbles : List of bubble instances associated to the element (optional)
-
-    '''
+    Attributes
+    ----------
+    edges :
+        List of edge instances associated to the element
+    faces:
+        List of face instances associated to the element (optional)
+    bubbles:
+        List of bubble instances associated to the element (optional)
+    """
     
     def __init__(self, typ, tag, vertices):
         GenericElement.__init__(self, typ, tag, vertices)

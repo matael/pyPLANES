@@ -25,8 +25,9 @@
 import numpy as np
 
 def lobatto(order,x):
-    """
-    Lobatto shape functions (eq (1.51) of Solin)
+    """Lobatto shape functions
+
+    Eq (1.51) of Solin
 
     Parameters
     ----------
@@ -34,6 +35,7 @@ def lobatto(order,x):
         degree of the polynomial
     x : ndarray
         position of the Gauss points
+
     Returns
     -------
     p_lobatto : ndarray
@@ -156,8 +158,9 @@ def lobatto(order,x):
     return p_lobatto, d_lobatto, t_lobatto
 
 def lobatto_kernels(order, x):
-    """
-    Lobatto kernels  Equation (1.53) of Solin
+    """Lobatto kernels
+
+    Equation (1.53) of Solin
 
     Parameters
     ----------
