@@ -234,9 +234,9 @@ class Gmsh():
         self.f.close()
         # print(sys.platform)
         if sys.platform == "darwin":
-            os.system("/Applications/Gmsh.app/Contents/MacOS/gmsh " + option + self.geo_file)
+            os.system("/Applications/Gmsh.app/Contents/MacOS/gmsh {} {}".format(option, self.geo_file))
         else:
-            os.system("gmsh " + option + self.geo_file)
+            os.system("gmsh {} {}".format(option, self.geo_file))
 
 # def one_layer(p):
 #     g = Gmsh(p.gmsh_file)
