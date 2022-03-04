@@ -164,7 +164,6 @@ class PeriodicPwProblem(Calculus, PeriodicMultiLayer):
             self.X_0_minus = X[:self.nb_waves]
             if self.termination == "transmission":
                 T = -(self.back_prop@self.X_0_minus)[::self.interfaces[-1].len_X]
-                # print(T)
                 self.Result.T0.append(T[0])          
                 self.Result.T.append(np.sum(np.real(self.ky)*np.abs(T**2))/np.real(self.ky[0]))
                 abs -= self.Result.T[-1]
