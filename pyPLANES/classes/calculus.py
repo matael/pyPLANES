@@ -25,18 +25,41 @@
 
 import numpy as np
 from mediapack import Air
-Air = Air()
 
 
 class Calculus():
-    def __init__(self, **kwargs):
-        self.frequencies = self.init_vec_frequencies( kwargs.get("frequencies", np.array([440])))
+    """
+    Calculus - Base class for all computations
+
+    This class is mostly storing important information about ongoing
+    computations and is intended to be used as a base for other computation
+    classes
+
+    Parameters
+    ----------
+    name_project : str
+        Name of the project
+    frequencies : np.ndarray
+        Vectors of frequencies to compute
+    theta_d : float, None
+        Angle of incidence (0 if ignored)
+    outfiles_directory : str, False
+        Specific directory in which to create the output files
+    plot_results : list, False
+        Controls which plots to create
+        todo: define the mapping
+    """
+
+    def __init__(self, name_project="unnamed_project", frequencies=np.array([440]),
+                 theta_d=False, outfiles_directory=False, plot_results=False, materials=None):
+        self.frequencies = self.init_vec_frequencies(frequencies)
         self.current_frequency = None
         self.omega = None
-        self.theta_d = kwargs.get("theta_d", False)
-        self.name_project = kwargs.get("name_project", "unnamed_project")
-        self.outfiles_directory = kwargs.get("outfiles_directory", False)
-        self.plot = kwargs.get("plot_results", False)
+        self.theta_d = theta_d
+        self.name_project = name_project
+        self.outfiles_directory = outfiles_directory
+        self.plot = plot_results
+        self.materials = materials if materials is not None else {}
 
     def init_vec_frequencies(self, frequency):
         if frequency[2] > 0:
@@ -57,7 +80,9 @@ class Calculus():
         self.current_frequency = f
         self.omega = 2*np.pi*f
 
+
 class FemCalculus(Calculus):
+
     def __init__(self, **kwargs):
         Calculus.__init__(self, **kwargs)
         self.out_file = self.name_project + ".FEM.txt"
@@ -81,6 +106,7 @@ class FemCalculus(Calculus):
         for _ent in self.model_entities:
             _ent.update_frequency(self.omega)
         self.modulus_reflex, self.modulus_trans, self.abs = 0, 0, 1
+
 
 class PwCalculus(Calculus):
     def __init__(self, **kwargs):
