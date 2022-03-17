@@ -26,14 +26,18 @@
 from pyPLANES.gmsh.tools.load_msh_file import load_msh_file
 
 class Mesh():
-    def __init__(self, **kwargs):
+    def __init__(self, materials_directory="", materials_dict=None
+                 dim=2, verbose=False, name_mesh="", **kw):
+        self.dim = dim
+        self.verbose = verbose
         self.entities = [] # List of all GMSH Entities
         self.model_entities = [] # List of Entities used in the Model
         self.vertices = []
         self.elements = []
-        self.materials_directory = kwargs.get("materials_directory", "")
+        self.materials_directory = materials_directory
+        self.materials_dict = materials_dict
         self.reference_elements = dict() # dictionary of reference_elements
-        load_msh_file(self, **kwargs)
+        load_msh_file(self, name_mesh)
 
 
 class FemMesh(Mesh):

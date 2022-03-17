@@ -49,12 +49,14 @@ from mediapack import Air, Fluid
 
 plot_color = ["r", "b", "m", "k", "g", "y"]
 
-def load_material(mat):
+def load_material(mat, materials_directory="materials", materials_dict=None):
     if mat == "Air":
         Air_mat = Air()
         return Fluid(c=Air_mat.c,rho=Air_mat.rho)
-    elif os.path.isfile("materials/" + mat + ".yaml") :
-        return from_yaml("materials/" + mat + ".yaml")
+    elif materials_dict is not None and mat in materials_dict:
+        return materials_dict[mat]
+    elif os.path.isfile(materials_directory + "/" + mat + ".yaml") :
+        return from_yaml(materials_directory + "/" + mat + ".yaml")
     else:
         return None
 

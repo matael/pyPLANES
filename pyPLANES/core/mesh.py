@@ -40,8 +40,9 @@ class Mesh():
         self.bubbles = []
         self.nb_edges = self.nb_faces = self.nb_bubbles = 0
         self.materials_directory = kwargs.get("materials_directory", "")
+        self.materials = kwargs.get("materials", {})
         self.reference_elements = dict() # dictionary of reference_elements
-        load_msh_file(self, **kwargs)
+        load_msh_file(self, kwargs["name_mesh"])
 
     def display_mesh(self):
         for _el in self.elements[1:]:
